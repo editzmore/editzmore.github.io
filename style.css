@@ -621,7 +621,7 @@ body:has(.switch__input:checked) .switch__mode--green {
   aspect-ratio: 16 / 9;
 }
 
-.sample-preview-trigger {
+.sample-preview-link {
   position: relative;
   display: block;
   width: 100%;
@@ -629,8 +629,7 @@ body:has(.switch__input:checked) .switch__mode--green {
   padding: 0;
   overflow: hidden;
   background: var(--bg-box);
-  border: 0;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .sample-preview-image {
@@ -657,13 +656,13 @@ body:has(.switch__input:checked) .switch__mode--green {
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.sample-preview-trigger:hover .sample-preview-play {
+.sample-preview-link:hover .sample-preview-play {
   color: var(--accent-btn-text);
   background: var(--accent-green);
   transform: translate(-50%, -50%) scale(1.08);
 }
 
-.sample-preview-trigger:focus-visible {
+.sample-preview-link:focus-visible {
   outline: 3px solid var(--accent-green);
   outline-offset: -3px;
 }
