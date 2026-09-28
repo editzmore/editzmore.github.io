@@ -3,7 +3,7 @@
  * - Sun/Moon Theme Switcher (Orange Mode vs. Green Mode) with LocalStorage
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+const initializePortfolio = () => {
   document.querySelectorAll('.sample-preview-trigger').forEach((trigger) => {
     trigger.addEventListener('click', () => {
       const previewUrl = trigger.getAttribute('data-preview-url');
@@ -20,7 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
       player.loading = 'eager';
       player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       trigger.replaceWith(player);
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializePortfolio, { once: true });
+    } else {
+      initializePortfolio();
+    }
   });
 
   // Theme Toggle Switch (Orange Canvas <-> Green Canvas)
