@@ -20,27 +20,18 @@ const initializePortfolio = () => {
       player.loading = 'eager';
       player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       trigger.replaceWith(player);
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializePortfolio, { once: true });
-    } else {
-      initializePortfolio();
-    }
+    });
   });
 
-  // Theme Toggle Switch (Orange Canvas <-> Green Canvas)
   const themeToggle = document.getElementById('themeToggle');
 
   if (themeToggle) {
-    // Check saved preference
     const savedTheme = localStorage.getItem('portfolio-theme-mode');
     if (savedTheme === 'green-mode') {
       themeToggle.checked = true;
       document.body.classList.add('green-canvas-mode');
     }
 
-    // Toggle event listener
     themeToggle.addEventListener('change', () => {
       if (themeToggle.checked) {
         document.body.classList.add('green-canvas-mode');
@@ -51,5 +42,10 @@ const initializePortfolio = () => {
       }
     });
   }
+};
 
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializePortfolio, { once: true });
+} else {
+  initializePortfolio();
+}
