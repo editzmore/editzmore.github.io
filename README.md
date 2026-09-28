@@ -4,12 +4,12 @@ Static portfolio website built with HTML, CSS, and JavaScript.
 
 ## Deploy with GitHub Pages
 
-This repository is configured for an organization project site. After pushing to `main`:
+This repository is the organization site (`editzmore.github.io`). After pushing to `main`:
 
-1. Open **Settings → Pages** in this repository.
+1. Open **Settings → Pages** in the repository.
 2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select `main` and `/(root)`, then save.
-4. GitHub Pages will publish the site at <https://editzmore.github.io/editzmore/>.
+3. Select `main` and `/(root)`, then save if Pages is not already publishing.
+4. GitHub Pages publishes the site at <https://editzmore.github.io/>.
 
 Updates pushed to the `main` branch will be published automatically. Initial publishing can take a few minutes.
 
