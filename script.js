@@ -120,49 +120,28 @@ const initModal = () => {
   });
 };
 
-/* ── 4. Creative Motion Showcase ─────────────────────────────────── */
+/* ── 4. Creative Motion Showcase (Continuous Loop) ──────────────── */
 const initMotionStudio = () => {
-  const tabs = document.querySelectorAll('.studio-tab');
   const scenes = document.querySelectorAll('.studio-scene');
-  const stage = document.getElementById('studioStage');
-
-  if (!tabs.length || !scenes.length) return;
+  const dots   = document.querySelectorAll('.studio-dot');
+  if (!scenes.length) return;
 
   let currentIdx = 0;
-  let timer = null;
 
   const showScene = (idx) => {
     currentIdx = idx;
-    tabs.forEach((tab, i) => {
-      const active = i === idx;
-      tab.classList.toggle('is-active', active);
-      tab.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
     scenes.forEach((scene, i) => {
       scene.classList.toggle('is-active', i === idx);
     });
-  };
-
-  const startTimer = () => {
-    clearInterval(timer);
-    timer = setInterval(() => {
-      showScene((currentIdx + 1) % scenes.length);
-    }, 5000);
-  };
-
-  tabs.forEach((tab, idx) => {
-    tab.addEventListener('click', () => {
-      showScene(idx);
-      startTimer();
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === idx);
     });
-  });
+  };
 
-  if (stage) {
-    stage.addEventListener('mouseenter', () => clearInterval(timer));
-    stage.addEventListener('mouseleave', () => startTimer());
-  }
-
-  startTimer();
+  // Continuous loop every 4.2 seconds
+  setInterval(() => {
+    showScene((currentIdx + 1) % scenes.length);
+  }, 4200);
 };
 
 /* ── Boot ────────────────────────────────────────────────────────── */

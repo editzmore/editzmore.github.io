@@ -392,37 +392,25 @@ iframe { display: block; border: none; }
   transition: color var(--tr);
 }
 
-/* Clean minimal tab switcher */
-.studio-tabs {
+/* Minimalist loop indicator dots */
+.studio-dots {
   display: inline-flex;
-  gap: 0.25rem;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 3px;
+  align-items: center;
+  gap: 5px;
+}
+
+.studio-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  transition: all 0.35s ease;
+}
+
+.studio-dot.is-active {
+  width: 16px;
   border-radius: var(--r-pill);
-  border: 1px solid var(--border);
-  transition: border-color var(--tr);
-}
-
-.studio-tab {
-  padding: 0.24rem 0.7rem;
-  border-radius: var(--r-pill);
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-sub);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.studio-tab:hover {
-  color: var(--text);
-}
-
-.studio-tab.is-active {
   background: var(--green);
-  color: var(--btn-text);
-  font-weight: 700;
 }
 
 /* Stage Area */
@@ -446,7 +434,7 @@ iframe { display: block; border: none; }
   gap: 0.75rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .studio-scene.is-active {
