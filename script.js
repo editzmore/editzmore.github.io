@@ -1,72 +1,162 @@
 /**
- * Portfolio Interactive Script
- * - Sun/Moon Theme Switcher (Orange Mode vs. Green Mode) with LocalStorage
- * - Dynamic Role Text Animation (slide-in / slide-out cycling)
+ * Portfolio Script — Complete Rewrite
+ *
+ * 1. Theme Toggle (Orange ↔ Green) with localStorage
+ * 2. Dynamic Role Text Cycling
+ * 3. Modal Preview System (Drive embed inside popup)
  */
 
-/* ── Dynamic Role Cycling ─────────────────────────────────────── */
-const roles = [
-  'Video Editor & Reels / Shorts Editor',
-  'Premiere Pro & DaVinci Expert',
-  'Social Media Content Creator',
-  'Motion Graphics Designer',
-  'Photoshop & Illustrator Artist',
-];
+/* ── 1. Theme Toggle ─────────────────────────────────────────────── */
+const initTheme = () => {
+  const toggle    = document.getElementById('themeToggle');
+  const icon      = document.getElementById('themeIcon');
+  const labelText = document.getElementById('themeLabel-text');
+  if (!toggle) return;
 
-const initRoleAnimation = () => {
-  const roleEl = document.querySelector('.dynamic-role');
-  if (!roleEl) return;
-
-  let current = 0;
-
-  const nextRole = () => {
-    // Slide out current text
-    roleEl.classList.add('slide-out');
-
-    setTimeout(() => {
-      current = (current + 1) % roles.length;
-      roleEl.textContent = roles[current];
-      roleEl.classList.remove('slide-out');
-      roleEl.classList.add('slide-in');
-
-      // Clean up slide-in class after animation ends
-      roleEl.addEventListener('animationend', () => {
-        roleEl.classList.remove('slide-in');
-      }, { once: true });
-    }, 350); // matches CSS transition duration
+  const apply = (isGreen) => {
+    document.body.classList.toggle('green-mode', isGreen);
+    toggle.checked     = isGreen;
+    icon.className     = isGreen ? 'ri-moon-line' : 'ri-sun-line';
+    if (labelText) labelText.textContent = isGreen ? 'Green' : 'Orange';
   };
 
-  // Start cycling every 2.8 seconds
-  setInterval(nextRole, 2800);
+  // Restore saved preference
+  apply(localStorage.getItem('theme') === 'green');
+
+  toggle.addEventListener('change', () => {
+    const isGreen = toggle.checked;
+    apply(isGreen);
+    localStorage.setItem('theme', isGreen ? 'green' : 'orange');
+  });
 };
 
-/* ── Theme Switcher ───────────────────────────────────────────── */
-const initializePortfolio = () => {
-  const themeToggle = document.getElementById('themeToggle');
+/* ── 2. Role Text Animation ──────────────────────────────────────── */
+const initRoles = () => {
+  const roles = [
+    'Video Editor & Reels / Shorts Editor',
+    'Premiere Pro & DaVinci Expert',
+    'Social Media Content Creator',
+    'Motion Graphics Designer',
+    'Photoshop & Illustrator Artist',
+  ];
 
-  if (themeToggle) {
-    const savedTheme = localStorage.getItem('portfolio-theme-mode');
-    if (savedTheme === 'green-mode') {
-      themeToggle.checked = true;
-      document.body.classList.add('green-canvas-mode');
-    }
+  const el = document.getElementById('heroRole');
+  if (!el) return;
 
-    themeToggle.addEventListener('change', () => {
-      if (themeToggle.checked) {
-        document.body.classList.add('green-canvas-mode');
-        localStorage.setItem('portfolio-theme-mode', 'green-mode');
-      } else {
-        document.body.classList.remove('green-canvas-mode');
-        localStorage.setItem('portfolio-theme-mode', 'orange-mode');
+  let idx = 0;
+
+  const next = () => {
+    el.classList.add('slide-out');
+
+    setTimeout(() => {
+      idx = (idx + 1) % roles.length;
+      el.textContent = roles[idx];
+      el.classList.remove('slide-out');
+      el.classList.add('slide-in');
+
+      el.addEventListener('animationend', () => {
+        el.classList.remove('slide-in');
+      }, { once: true });
+    }, 320);
+  };
+
+  setInterval(next, 3000);
+};
+
+/* ── 3. Modal Preview System ─────────────────────────────────────── */
+const initModal = () => {
+  const overlay     = document.getElementById('previewModal');
+  const box         = document.getElementById('modalBox');
+  const closeBtn    = document.getElementById('modalClose');
+  const iframeWrap  = document.getElementById('modalIframeWrap');
+  const titleEl     = document.getElementById('modalTitle');
+  const driveLink   = document.getElementById('modalDriveLink');
+
+  if (!overlay) return;
+
+  let activeIframe = null;
+
+  const openModal = (card) => {
+    const src   = card.dataset.src;
+    const title = card.dataset.title;
+    const link  = card.dataset.link;
+    const type  = card.dataset.type; // 'reel' | 'vector'
+
+    // Set modal type class
+    box.className = 'modal-box';
+    box.classList.add(type === 'reel' ? 'modal-box--reel' : 'modal-box--vector');
+
+    // Set title & link
+    titleEl.textContent = title;
+    driveLink.href = link;
+
+    // Inject iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = title;
+    iframe.allow = 'autoplay; fullscreen';
+    iframe.loading = 'lazy';
+    iframeWrap.innerHTML = '';
+    iframeWrap.appendChild(iframe);
+    activeIframe = iframe;
+
+    // Open overlay
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  };
+
+  const closeModal = () => {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Remove iframe after animation to stop video
+    setTimeout(() => {
+      iframeWrap.innerHTML = '';
+      activeIframe = null;
+    }, 280);
+  };
+
+  // Card click → open modal
+  document.querySelectorAll('.work-card').forEach(card => {
+    card.addEventListener('click', () => openModal(card));
+
+    // Keyboard: Enter / Space → open
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(card);
       }
     });
-  }
+  });
 
-  initRoleAnimation();
+  // Close button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Click outside modal box → close
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Escape key → close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+};
+
+/* ── Boot ────────────────────────────────────────────────────────── */
+const boot = () => {
+  initTheme();
+  initRoles();
+  initModal();
 };
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializePortfolio, { once: true });
+  document.addEventListener('DOMContentLoaded', boot, { once: true });
 } else {
-  initializePortfolio();
+  boot();
 }
