@@ -128,20 +128,30 @@ const initMotionStudio = () => {
 
   let currentIdx = 0;
 
-  const showScene = (idx) => {
-    currentIdx = idx;
-    scenes.forEach((scene, i) => {
-      scene.classList.toggle('is-active', i === idx);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === idx);
-    });
+  const showScene = (nextIdx) => {
+    const prevIdx = currentIdx;
+    currentIdx = nextIdx;
+
+    // 1. Fade out current scene
+    if (scenes[prevIdx]) {
+      scenes[prevIdx].classList.remove('is-active');
+    }
+
+    // 2. Short pause so they never overlap, then fade in the new one
+    setTimeout(() => {
+      if (scenes[nextIdx]) {
+        scenes[nextIdx].classList.add('is-active');
+      }
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === nextIdx);
+      });
+    }, 280);
   };
 
-  // Continuous loop every 4.2 seconds
+  // Continuous loop every 4.5 seconds
   setInterval(() => {
     showScene((currentIdx + 1) % scenes.length);
-  }, 4200);
+  }, 4500);
 };
 
 /* ── Boot ────────────────────────────────────────────────────────── */
