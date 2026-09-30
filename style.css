@@ -608,67 +608,179 @@ iframe { display: block; border: none; }
 }
 .modal-close:hover { background: #e53e3e; transform: scale(1.1); }
 
-/* ── RESPONSIVE ───────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   Desktop ≥1024px  |  Tablet 768–1023px  |  Mobile ≤767px
+   ═══════════════════════════════════════════════════════════════════ */
 
-/* Tablet (641–900px) — still 2-col but tighter */
-@media (max-width: 900px) {
-  .main-grid {
-    grid-template-columns: 1fr 1.2fr;
-    gap: 1rem;
-  }
+/* ── Desktop Large (≥1280px) ──────────────────────────────────────── */
+@media (min-width: 1280px) {
+  .page { padding: 1.25rem 2.5rem; gap: 1rem; }
+  .main-grid { grid-template-columns: 1fr 1.6fr; }
+  .wcard { min-height: 56px; padding: 0.65rem 0.85rem; }
 }
 
-/* Mobile (≤ 640px) — vertical stack, allow scroll */
-@media (max-width: 640px) {
-  html, body { overflow: auto; } /* allow scroll on mobile */
+/* ── Desktop Normal (1024–1279px) ─────────────────────────────────── */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .main-grid { grid-template-columns: 1fr 1.45fr; }
+  .hero__name { font-size: clamp(1.5rem,3vw,2.2rem); }
+}
+
+/* ── Tablet (768–1023px) ──────────────────────────────────────────── */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .page {
+    padding: 0.9rem 1.1rem;
+    gap: 0.65rem;
+  }
+
+  /* Still 2-col but narrower left panel */
+  .main-grid {
+    grid-template-columns: 1fr 1.3fr;
+  }
+
+  /* Tighter left panel internals */
+  .left-panel {
+    padding: 0.85rem 1rem;
+    gap: 0.55rem;
+  }
+  .right-panel {
+    padding: 0.85rem 1rem;
+    gap: 0.45rem;
+  }
+
+  .hero__name {
+    font-size: clamp(1.35rem,3.5vw,1.9rem);
+  }
+  .hero__bio {
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  /* Slightly smaller tool chips */
+  .tool-chip {
+    font-size: 0.65rem;
+    padding: 0.22rem 0.55rem;
+  }
+
+  /* Compact cards */
+  .wcard {
+    min-height: 48px;
+    padding: 0.5rem 0.65rem;
+    gap: 0.45rem;
+  }
+  .wcard__title { font-size: 0.82rem; }
+  .wcard__play  { font-size: 0.62rem; padding: 0.28rem 0.55rem; min-height: 26px; }
+  .wcard__drive { width: 26px; height: 26px; font-size: 0.82rem; }
+
+  /* Contact strip smaller */
+  .contact-strip { padding: 0.55rem 0.8rem; gap: 0.4rem; }
+  .c-btn { font-size: 0.74rem; padding: 0.38rem 0.75rem; min-height: 32px; }
+
+  /* Modal full width on tablet */
+  .modal-box--reel, .modal-box--vector { max-width: min(90vw, 380px); }
+}
+
+/* ── Mobile (≤ 767px) ─────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Allow vertical scroll on mobile — content won't fit single screen */
+  html, body { overflow-x: hidden; overflow-y: auto; }
 
   .page {
     height: auto;
-    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: none;
     overflow: visible;
-    padding: 0.85rem 0.85rem 1.5rem;
+    padding: 0.9rem 0.9rem 2rem;
+    gap: 0.85rem;
   }
 
+  /* Stack panels vertically */
   .main-grid {
     grid-template-columns: 1fr;
+    gap: 0;
     overflow: visible;
+    border-radius: var(--r-md);
   }
 
-  .left-panel, .right-panel { overflow: visible; }
+  .left-panel {
+    overflow: visible;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    gap: 0.65rem;
+  }
 
+  .right-panel {
+    overflow: visible;
+    padding: 1rem;
+    gap: 0.55rem;
+  }
+
+  /* Works list: no internal scroll, show all cards */
   .works-list {
     overflow: visible;
     max-height: none;
   }
 
-  .hero__name { font-size: clamp(1.5rem,7vw,2rem); }
+  /* Contact strip: row of buttons */
+  .contact-strip { margin-top: 0; }
+  .contact-strip__btns { flex-wrap: wrap; }
+  .c-btn { flex: 1; justify-content: center; min-width: 80px; }
 
-  .wcard__title { white-space: normal; }
+  /* Hero */
+  .hero__name { font-size: clamp(1.6rem,7vw,2.2rem); }
 
-  .modal-box--reel,
-  .modal-box--vector { max-width: 100%; }
+  /* Cards: allow title to wrap */
+  .wcard { min-height: 52px; }
+  .wcard__title { white-space: normal; font-size: 0.85rem; }
+
+  /* Panel footer: stack */
+  .panel-footer { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+
+  /* Modal: full width */
+  .modal-box--reel, .modal-box--vector { max-width: 96vw; }
 }
 
-/* Small phone (≤ 400px) */
+/* ── Small Phone (≤ 400px) ────────────────────────────────────────── */
 @media (max-width: 400px) {
-  .page { padding: 0.7rem 0.7rem 1.25rem; }
-  .hero__name { font-size: clamp(1.35rem,7vw,1.75rem); }
-  .theme-toggle__label { display: none; }
+  .page { padding: 0.75rem 0.75rem 1.5rem; }
+
+  .left-panel, .right-panel { padding: 0.85rem; }
+
+  .hero__name { font-size: clamp(1.4rem,8vw,1.8rem); }
+  .hero__bio  { font-size: 0.74rem; }
+
+  /* Even smaller buttons */
+  .c-btn { font-size: 0.72rem; padding: 0.38rem 0.65rem; min-height: 30px; }
+
+  .wcard { padding: 0.48rem 0.6rem; gap: 0.4rem; min-height: 48px; }
+  .wcard__play { padding: 0.25rem 0.5rem; font-size: 0.6rem; min-height: 24px; }
 }
 
-/* Landscape phone */
-@media (max-height: 500px) and (orientation: landscape) {
-  .hero__name { font-size: clamp(1.2rem,4vw,1.6rem); }
-  .hero__bio  { display: none; }
+/* ── Landscape Phone (≤ 767px, landscape) ────────────────────────── */
+@media (max-width: 767px) and (orientation: landscape) {
+  /* Re-enable 2-col layout in landscape */
+  .main-grid {
+    grid-template-columns: 1fr 1.2fr;
+    grid-template-rows: 1fr;
+  }
+  .left-panel {
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+  }
+  .hero__bio { display: none; }  /* save space */
+  .hero__name { font-size: clamp(1.1rem,4vw,1.5rem); }
 }
 
-/* Focus */
-a:focus-visible, button:focus-visible, label:focus-within {
+/* ── Focus & Accessibility ────────────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+.ios-toggle input:focus-visible + .ios-toggle__track {
   outline: 2px solid var(--green);
   outline-offset: 3px;
 }
 
-/* Reduced motion */
+/* ── Reduced Motion ───────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
