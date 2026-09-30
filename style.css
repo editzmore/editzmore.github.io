@@ -139,82 +139,30 @@ body {
 }
 
 /* ===================================================================
-   EXACT USER SWITCH COMPONENT (SUN & MOON MORPHING)
+   THEME TOGGLE — Simple & Clean Icon Pill Button
    =================================================================== */
 .switch {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  font-size: 13.5px; /* Compact & proportional for header */
-  color: var(--text-white);
+  gap: 0.5rem;
   background: var(--bg-card);
   border: 1px solid var(--tag-border);
   border-radius: 50px;
-  padding: 0.45rem 0.8rem 0.45rem 0.55rem;
-  box-shadow: 0 4px 14px rgba(0, 20, 10, 0.14);
+  padding: 0.42rem 0.85rem;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   user-select: none;
-  transition: background var(--trans-dur), border-color var(--trans-dur), box-shadow 0.2s ease;
-}
-
-.switch,
-.switch__input {
-  position: relative;
   -webkit-tap-highlight-color: transparent;
+  transition: background var(--trans-dur), border-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-white);
+  white-space: nowrap;
 }
 
 .switch:hover {
   border-color: var(--accent-green);
-  box-shadow: 0 6px 18px rgba(0, 20, 10, 0.22);
-}
-
-.switch__track {
-  position: relative;
-  display: block;
-  flex: 0 0 auto;
-  width: 3em;
-  height: 1.5em;
-}
-
-.switch__input {
-  background-color: #073820; /* Deep green track */
-  border: 1.5px solid rgba(0, 230, 118, 0.4);
-  border-radius: 0.75em;
-  cursor: pointer;
-  display: block;
-  width: 3em;
-  height: 1.5em;
-  transition: background-color var(--trans-dur) var(--trans-timing), border-color var(--trans-dur) var(--trans-timing);
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-}
-
-.switch__mode {
-  min-width: 6.3em;
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-}
-
-.switch__mode--orange {
-  color: var(--accent-green);
-}
-
-.switch__mode--green {
-  display: none;
-  color: var(--text-muted);
-}
-
-body:has(.switch__input:checked) .switch__mode--orange {
-  display: none;
-}
-
-body:has(.switch__input:checked) .switch__mode--green {
-  display: inline;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .switch:focus-within {
@@ -222,137 +170,67 @@ body:has(.switch__input:checked) .switch__mode--green {
   outline-offset: 3px;
 }
 
-.switch__input:before {
-  background-color: #00e676;
-  border-radius: 50%;
-  content: "";
-  display: block;
+/* Hidden real checkbox */
+.switch__input {
   position: absolute;
-  top: 0.1em;
-  left: 0.1em;
-  width: 1.25em;
-  height: 1.25em;
-  transition:
-    background-color var(--trans-dur) var(--trans-timing),
-    transform var(--trans-dur) var(--trans-timing);
-}
-
-.switch__icon,
-.switch__icon-part {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.switch__icon {
-  background-color: transparent;
-  border-radius: 50%;
-  overflow: hidden;
+  opacity: 0;
+  width: 0;
+  height: 0;
   pointer-events: none;
-  top: 0.1em;
-  left: 0.1em;
-  width: 1.25em;
-  height: 1.25em;
-  transition: transform var(--trans-dur) var(--trans-timing);
 }
 
-.switch__icon-part {
-  transition:
-    box-shadow var(--trans-dur) var(--trans-timing),
-    transform var(--trans-dur) var(--trans-timing),
-    background-color var(--trans-dur) var(--trans-timing);
+/* Sun icon — visible in orange mode (default) */
+.switch__icon-sun,
+.switch__icon-moon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.switch__icon-part--1,
-.switch__icon-part--2,
-.switch__icon-part--3 {
-  border-radius: 50%;
+.switch__icon-moon {
+  display: none;
 }
 
-.switch__icon-part--1 {
-  background-color: transparent;
-  top: calc(50% - 0.375em);
-  left: calc(50% - 0.375em);
-  width: 0.75em;
-  height: 0.75em;
+body:has(.switch__input:checked) .switch__icon-sun {
+  display: none;
 }
 
-.switch__icon-part--2 {
-  background-color: #073820;
-  top: calc(50% - 0.4375em);
-  left: calc(50% - 0.0625em);
-  width: 0.5em;
-  height: 0.5em;
-  transform: translate(-0.1875em, 0.1875em) scale(0.2);
+body:has(.switch__input:checked) .switch__icon-moon {
+  display: flex;
 }
 
-.switch__icon-part--3 {
-  box-shadow: 0 0 0 0.625em #073820 inset;
-  width: 1.25em;
-  height: 1.25em;
-  transform: scale(0.25);
+/* Mode label text */
+.switch__mode {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
-.switch__icon-part--3 ~ .switch__icon-part {
-  background-color: #073820;
-  border-radius: 0.0625em;
-  top: 50%;
-  left: 50%;
-  width: 0.125em;
-  height: 0.1875em;
-  transform-origin: 50% 0;
-}
+.switch__mode--orange { color: var(--accent-green); }
+.switch__mode--green  { display: none; color: var(--text-muted); }
 
-.switch__icon-part--4  { transform: translateX(-50%) rotate(0) translateY(0.25em); }
-.switch__icon-part--5  { transform: translateX(-50%) rotate(45deg) translateY(0.25em); }
-.switch__icon-part--6  { transform: translateX(-50%) rotate(90deg) translateY(0.25em); }
-.switch__icon-part--7  { transform: translateX(-50%) rotate(135deg) translateY(0.25em); }
-.switch__icon-part--8  { transform: translateX(-50%) rotate(180deg) translateY(0.25em); }
-.switch__icon-part--9  { transform: translateX(-50%) rotate(225deg) translateY(0.25em); }
-.switch__icon-part--10 { transform: translateX(-50%) rotate(270deg) translateY(0.25em); }
-.switch__icon-part--11 { transform: translateX(-50%) rotate(315deg) translateY(0.25em); }
+body:has(.switch__input:checked) .switch__mode--orange { display: none; }
+body:has(.switch__input:checked) .switch__mode--green  { display: inline; }
 
+/* SR-only label */
 .switch__sr {
-  overflow: hidden;
   position: absolute;
   width: 1px;
   height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
-/* `:checked` state (Moon / Green Mode) */
-.switch__input:checked {
-  background-color: #ff6600;
-  border-color: rgba(255, 255, 255, 0.5);
+/* Hide old unused parts */
+.switch__track,
+.switch__icon-part {
+  display: none !important;
 }
 
-.switch__input:checked:before {
-  background-color: #072b18;
-  transform: translateX(1.5em);
-}
 
-.switch__input:checked ~ .switch__icon {
-  transform: translateX(1.5em);
-}
-
-.switch__input:checked ~ .switch__icon .switch__icon-part--2 {
-  background-color: #ff6600;
-  transform: translate(0, 0) scale(1);
-}
-
-.switch__input:checked ~ .switch__icon .switch__icon-part--3 {
-  box-shadow: 0 0 0 0.25em #00e676 inset;
-  transform: scale(1);
-}
-
-.switch__input:checked ~ .switch__icon .switch__icon-part--4  { transform: translateX(-50%) rotate(0) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--5  { transform: translateX(-50%) rotate(45deg) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--6  { transform: translateX(-50%) rotate(90deg) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--7  { transform: translateX(-50%) rotate(135deg) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--8  { transform: translateX(-50%) rotate(180deg) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--9  { transform: translateX(-50%) rotate(225deg) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--10 { transform: translateX(-50%) rotate(270deg) translateY(0.625em) scale(0); }
-.switch__input:checked ~ .switch__icon .switch__icon-part--11 { transform: translateX(-50%) rotate(315deg) translateY(0.625em) scale(0); }
 
 /* Header Chat Button */
 .chat-btn {
