@@ -390,11 +390,12 @@ button { cursor: pointer; font: inherit; }
   );
   border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
   border-radius: var(--radius-lg);
-  padding: 1rem;
+  padding: 1rem 1.1rem;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
   box-shadow: var(--shadow-card);
   transition:
     transform var(--transition-fast),
@@ -403,6 +404,7 @@ button { cursor: pointer; font: inherit; }
     background var(--transition);
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  min-height: 72px;
 }
 
 .work-card:hover {
@@ -415,140 +417,105 @@ button { cursor: pointer; font: inherit; }
   transform: translateY(-2px);
 }
 
-/* Card top row */
+/* Left: number + type badge stacked */
 .work-card__meta {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.3rem;
+  flex: 0 0 auto;
+  min-width: 42px;
 }
 
 .work-card__num {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--green);
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   transition: color var(--transition);
+  line-height: 1;
 }
 
 .work-card__pill {
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   font-weight: 700;
   color: var(--mint);
   background: var(--tag-bg);
   border: 1px solid var(--tag-border);
   border-radius: var(--radius-pill);
-  padding: 0.22rem 0.6rem;
+  padding: 0.18rem 0.45rem;
   text-transform: uppercase;
-  letter-spacing: 0.7px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.3;
+  white-space: nowrap;
   transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
-/* Thumbnail area */
-.work-card__thumb {
-  width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  position: relative;
-  background: var(--box);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Divider */
+.work-card__divider {
+  width: 1px;
+  align-self: stretch;
+  background: color-mix(in srgb, var(--border) 60%, transparent);
+  flex: 0 0 auto;
 }
 
-/* 9:16 reels */
-.work-card__thumb--reel {
-  aspect-ratio: 9 / 16;
-}
-
-/* 3:4 vector art */
-.work-card__thumb--vector {
-  aspect-ratio: 3 / 4;
-}
-
-/* Gradient backdrop in thumb */
-.work-card__thumb-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    color-mix(in srgb, var(--card-hover) 70%, transparent),
-    transparent 75%
-  );
-}
-
-/* Play icon overlay */
-.work-card__play {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-}
-
-.work-card__play-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  color: #fff;
-  transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
-}
-
-.work-card:hover .work-card__play-icon {
-  background: var(--green);
-  color: var(--btn-text);
-  border-color: var(--green);
-  transform: scale(1.1);
-}
-
-.work-card__play-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-align: center;
-  line-height: 1.3;
-  transition: color var(--transition);
-}
-
-/* Card bottom */
-.work-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding-top: 0.25rem;
-}
-
+/* Middle: title */
 .work-card__title {
-  font-size: clamp(0.85rem, 1.5vw, 0.98rem);
+  flex: 1;
+  min-width: 0;
+  font-size: clamp(0.88rem, 1.8vw, 1rem);
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.35;
-  min-width: 0;
-  flex: 1;
 }
 
-.work-card__link {
+/* Right: action buttons */
+.work-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+}
+
+/* Preview button */
+.work-card__preview-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
   font-size: 0.72rem;
   font-weight: 700;
+  color: var(--btn-text);
+  background: var(--green);
+  border: 1px solid var(--green);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  min-height: 34px;
+  cursor: pointer;
+}
+
+.work-card__preview-btn:hover,
+.work-card:hover .work-card__preview-btn {
+  background: var(--green-hover);
+  border-color: var(--green-hover);
+  transform: scale(1.04);
+}
+
+/* Drive link */
+.work-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--green);
   border: 1px solid var(--tag-border);
   border-radius: var(--radius-pill);
-  padding: 0.38rem 0.75rem;
+  padding: 0.4rem 0.75rem;
   white-space: nowrap;
-  flex: 0 0 auto;
   transition: all var(--transition-fast);
   min-height: 34px;
 }
@@ -600,13 +567,16 @@ button { cursor: pointer; font: inherit; }
   transform: scale(1) translateY(0);
 }
 
+/* Prevent modal from overflowing viewport height */
+.modal-box {
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 /* Reel modal (9:16) */
 .modal-box--reel {
   max-width: 360px;
-}
-
-.modal-box--reel .modal-iframe-wrap {
-  aspect-ratio: 9 / 16;
 }
 
 /* Vector modal (3:4) */
@@ -614,22 +584,30 @@ button { cursor: pointer; font: inherit; }
   max-width: 440px;
 }
 
-.modal-box--vector .modal-iframe-wrap {
-  aspect-ratio: 3 / 4;
-}
-
+/* iframe container — padding-bottom trick (most reliable cross-browser) */
 .modal-iframe-wrap {
   position: relative;
   width: 100%;
   background: #000;
+  overflow: hidden;
+}
+
+.modal-box--reel .modal-iframe-wrap {
+  padding-bottom: 177.78%; /* 16:9 inverted → 9:16 */
+}
+
+.modal-box--vector .modal-iframe-wrap {
+  padding-bottom: 133.33%; /* 4:3 ratio */
 }
 
 .modal-iframe-wrap iframe {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border: none;
+  display: block;
 }
 
 .modal-info {

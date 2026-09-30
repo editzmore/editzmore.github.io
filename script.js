@@ -119,11 +119,21 @@ const initModal = () => {
     }, 280);
   };
 
-  // Card click → open modal
+  // Card or Preview btn click → open modal
   document.querySelectorAll('.work-card').forEach(card => {
+    // Clicking the preview button
+    const previewBtn = card.querySelector('.work-card__preview-btn');
+    if (previewBtn) {
+      previewBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(card);
+      });
+    }
+
+    // Clicking anywhere else on card also opens modal
     card.addEventListener('click', () => openModal(card));
 
-    // Keyboard: Enter / Space → open
+    // Keyboard: Enter / Space
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
