@@ -6,10 +6,10 @@
 /* ── Design Tokens ────────────────────────────────────────────────── */
 :root {
   --canvas:      #c23b0a;
-  --card:        #073820;
-  --card-h:      #0a4a2a;
-  --box:         #052c18;
-  --border:      rgba(0, 230, 118, 0.28);
+  --card:        #0d4a28;    /* slightly lighter for contrast on canvas */
+  --card-h:      #115c34;
+  --box:         #083320;
+  --border:      rgba(0, 230, 118, 0.32);
 
   --green:       #00e676;
   --green-h:     #1aff8a;
@@ -37,9 +37,9 @@
 
 body.green-mode {
   --canvas:  #062015;
-  --card:    #8a2a04;
-  --card-h:  #a33508;
-  --box:     #6d1e01;
+  --card:    #972e06;   /* brighter card in green mode */
+  --card-h:  #b03808;
+  --box:     #7a2202;
   --border:  rgba(255,102,0,0.3);
   --green:   #ff6600;
   --green-h: #ff7d1a;
@@ -104,10 +104,14 @@ iframe { display: block; border: none; }
 
 .topbar__brand {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1rem,2.5vw,1.25rem);
+  font-size: clamp(1.1rem,2.5vw,1.4rem);
   font-weight: 800;
   letter-spacing: -0.5px;
   color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 0.2rem 0.65rem;
 }
 .topbar__dot { color: var(--green); transition: color var(--tr); }
 
@@ -137,19 +141,27 @@ iframe { display: block; border: none; }
 .main-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: clamp(1rem,3vw,2rem);
+  grid-template-columns: 1fr 1.5fr;
+  gap: 0;
   overflow: hidden;
   min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  transition: border-color var(--tr), background var(--tr), box-shadow var(--tr);
 }
 
 /* ── LEFT PANEL ───────────────────────────────────────────────────── */
 .left-panel {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem,2vh,1.25rem);
+  gap: clamp(0.6rem,1.8vh,1rem);
   overflow: hidden;
   min-height: 0;
+  padding: clamp(1rem,2.5vw,1.5rem);
+  border-right: 1px solid var(--border);
+  transition: border-color var(--tr);
 }
 
 /* Hero */
@@ -185,7 +197,7 @@ iframe { display: block; border: none; }
 
 .hero__name {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.6rem,4vw,2.6rem);
+  font-size: clamp(1.5rem,3.5vw,2.4rem);
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -1px;
@@ -255,14 +267,15 @@ iframe { display: block; border: none; }
 
 /* Contact strip */
 .contact-strip {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card-h) 60%, transparent);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: clamp(0.65rem,2vh,1rem) clamp(0.75rem,2vw,1.1rem);
+  border-radius: var(--r-md);
+  padding: clamp(0.6rem,1.8vh,0.9rem) clamp(0.65rem,1.8vw,1rem);
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.5rem;
   flex-shrink: 0;
+  margin-top: auto;    /* push to bottom of left panel */
   transition: background var(--tr), border-color var(--tr);
 }
 .contact-strip__label {
@@ -299,9 +312,10 @@ iframe { display: block; border: none; }
 .right-panel {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.55rem;
   overflow: hidden;
   min-height: 0;
+  padding: clamp(1rem,2.5vw,1.5rem);
 }
 
 .panel-header {
@@ -350,22 +364,25 @@ iframe { display: block; border: none; }
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  background: linear-gradient(140deg, color-mix(in srgb, var(--card) 94%, white), var(--card) 70%);
-  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  gap: 0.55rem;
+  background: color-mix(in srgb, var(--canvas) 18%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  border-left: 3px solid transparent;   /* accent on hover */
   border-radius: var(--r-md);
-  padding: 0.6rem 0.75rem;
-  min-height: 56px;
+  padding: 0.55rem 0.7rem;
+  min-height: 52px;
   cursor: pointer;
   flex-shrink: 0;
-  box-shadow: var(--sh);
-  transition: transform var(--trf), border-color var(--trf), box-shadow var(--trf), background var(--tr);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: transform var(--trf), border-color var(--trf), border-left-color var(--trf), box-shadow var(--trf), background var(--tr);
   -webkit-tap-highlight-color: transparent;
 }
 .wcard:hover {
-  transform: translateX(4px);
+  transform: translateX(3px);
   border-color: var(--green);
-  box-shadow: var(--sh-h);
+  border-left-color: var(--green);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  background: color-mix(in srgb, var(--canvas) 10%, var(--card-h));
 }
 .wcard:active { transform: translateX(2px); }
 
