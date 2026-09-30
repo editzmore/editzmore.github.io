@@ -7,16 +7,13 @@
 
 /* ── 1. Theme ────────────────────────────────────────────────────── */
 const initTheme = () => {
-  const toggle    = document.getElementById('themeToggle');
-  const icon      = document.getElementById('themeIcon');
-  const labelText = document.getElementById('themeLabelText');
+  const toggle = document.getElementById('themeToggle');
   if (!toggle) return;
 
   const apply = (isGreen) => {
     document.body.classList.toggle('green-mode', isGreen);
     toggle.checked = isGreen;
-    if (icon) icon.className = isGreen ? 'ri-moon-line' : 'ri-sun-line';
-    if (labelText) labelText.textContent = isGreen ? 'Green' : 'Orange';
+    // iOS switch visual is handled entirely by CSS :checked selector
   };
 
   apply(localStorage.getItem('theme') === 'green');

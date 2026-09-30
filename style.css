@@ -97,45 +97,72 @@ iframe { display: block; border: none; }
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;   /* toggle sticks to top-right only */
   flex-shrink: 0;
   gap: 1rem;
 }
 
-.topbar__brand {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.1rem,2.5vw,1.4rem);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  padding: 0.2rem 0.65rem;
-}
-.topbar__dot { color: var(--green); transition: color var(--tr); }
-
-/* Theme toggle */
-.theme-toggle {
+/* iOS-style toggle switch */
+.ios-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-pill);
-  padding: 0.35rem 0.75rem;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text);
-  white-space: nowrap;
-  min-height: 34px;
-  transition: background var(--tr), border-color var(--trf), box-shadow var(--trf);
 }
-.theme-toggle:hover { border-color: var(--green); box-shadow: 0 0 0 3px rgba(0,230,118,0.15); }
-.theme-toggle i { font-size: 0.95rem; line-height: 1; }
-#themeToggle { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+
+/* Hide the real checkbox */
+.ios-toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Track — the pill background */
+.ios-toggle__track {
+  position: relative;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  flex-shrink: 0;
+  transition: background 0.32s ease, border-color 0.32s ease, box-shadow 0.28s ease;
+}
+.ios-toggle:hover .ios-toggle__track {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Thumb — the white sliding circle */
+.ios-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.38), 0 0.5px 2px rgba(0,0,0,0.18);
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Checked (Green mode) → track turns green, thumb slides right */
+#themeToggle:checked + .ios-toggle__track {
+  background: var(--green);
+  border-color: var(--green);
+}
+#themeToggle:checked + .ios-toggle__track .ios-toggle__thumb {
+  transform: translateX(22px);
+}
+
+/* Focus ring */
+.ios-toggle input:focus-visible + .ios-toggle__track {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+}
+
 
 /* ── Main 2-column grid ───────────────────────────────────────────── */
 .main-grid {
