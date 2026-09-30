@@ -378,7 +378,7 @@ button { cursor: pointer; font: inherit; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(0.85rem, 2vw, 1.35rem);
-  align-items: start;
+  /* No align-items override — default stretch makes all row cards same height */
 }
 
 /* Work Card */
@@ -396,6 +396,8 @@ button { cursor: pointer; font: inherit; }
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  height: 100%;          /* fill the full grid cell height */
+  min-height: 72px;
   box-shadow: var(--shadow-card);
   transition:
     transform var(--transition-fast),
@@ -404,7 +406,6 @@ button { cursor: pointer; font: inherit; }
     background var(--transition);
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-  min-height: 72px;
 }
 
 .work-card:hover {
