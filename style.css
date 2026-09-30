@@ -533,8 +533,9 @@ body:has(.switch__input:checked) .switch__mode--green {
 
 .samples-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.35rem;
+  align-items: start;
 }
 
 .sample-card {
@@ -589,7 +590,6 @@ body:has(.switch__input:checked) .switch__mode--green {
 
 .sample-preview-box {
   width: 100%;
-  height: 360px;
   border-radius: 14px;
   overflow: hidden;
   background:
@@ -600,25 +600,22 @@ body:has(.switch__input:checked) .switch__mode--green {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
+/* 9:16 Reel Frame — uses aspect-ratio for clean responsive scaling */
 .sample-preview-box.reel-frame {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 177.78%; /* 9:16 ratio */
-  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  height: auto;
   display: block;
-  margin: 0 auto;
+  padding-bottom: 0;
 }
 
 .sample-preview-box.reel-frame iframe {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  transform: translate(-50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border: none;
   display: block;
 }
@@ -678,21 +675,17 @@ body:has(.switch__input:checked) .switch__mode--green {
 }
 
 .sample-preview-box.vector-frame {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 133.33%; /* 4/3 * 100 for 3:4 ratio */
-  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  height: auto;
   display: block;
+  padding-bottom: 0;
 }
 
 .sample-preview-box.vector-frame iframe {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  transform: translate(-50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border: none;
   display: block;
 }
@@ -915,10 +908,6 @@ body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.4rem;
   }
-
-  .sample-preview-box.reel-frame {
-    border: 0;
-  }
 }
 
 /* ── Tablet Landscape (769px – 900px) ────────────────────────── */
@@ -992,21 +981,21 @@ body {
     gap: 0.45rem;
   }
 
-  /* Single-column project gallery on phones */
+  /* Two-column grid on phones — reel cards side by side */
   .samples-grid {
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
   }
 
   .sample-card {
-    max-width: 440px;
-    margin: 0 auto;
     width: 100%;
-    padding: 0.85rem;
+    padding: 0.65rem;
   }
 
+  /* Cap reel height on mobile so it doesn't dominate the screen */
   .sample-preview-box.reel-frame {
-    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 340px;
   }
 
   .sample-card-body h3 {
@@ -1105,6 +1094,11 @@ body {
 
   .section-head h2 {
     font-size: 1.2rem;
+  }
+
+  /* On small phones 2-col grid is narrow — cap reel height */
+  .sample-preview-box.reel-frame {
+    max-height: 220px;
   }
 
   .contact-box h2 {
