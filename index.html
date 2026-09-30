@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#c23b0a">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="Thamodharan Ganesan — Video Editor specialising in Reels, Shorts, and Motion Graphics.">
-  <title>Thamodharan Ganesan | Video Editor &amp; Reels / Shorts Editor</title>
+  <meta name="description" content="Thamodharan Ganesan — Video Editor specialising in Reels, Shorts & Motion Graphics.">
+  <title>Thamodharan Ganesan | Video Editor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
@@ -16,191 +13,192 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="site-wrapper">
+<div class="page">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-actions">
-      <label class="theme-toggle" title="Toggle Theme">
-        <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle theme">
-        <i class="ri-sun-line" id="themeIcon"></i>
-        <span class="theme-toggle__label" id="themeLabelText">Orange</span>
-      </label>
-      </div>
+  <!-- ── HEADER ───────────────────────────────────────────── -->
+  <header class="topbar">
+    <span class="topbar__brand">TG<span class="topbar__dot">.</span></span>
+    <label class="theme-toggle" title="Switch theme">
+      <input type="checkbox" id="themeToggle" role="switch" aria-label="Toggle theme">
+      <i class="ri-sun-line" id="themeIcon"></i>
+      <span class="theme-toggle__label" id="themeLabelText">Orange</span>
+    </label>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>
-      <span class="hero__name">Thamodharan Ganesan</span>
-      <span class="hero__role-wrap">
-        <span class="hero__role" id="heroRole">Video Editor &amp; Reels / Shorts Editor</span>
-      </span>
-    </h1>
-    <span class="hero__underline" aria-hidden="true"></span>
-    <p class="hero__bio">
-      I craft high-retention videos and create clean visual designs.
-      Proficient in Premiere Pro, DaVinci Resolve, CapCut, Photoshop, and Illustrator.
-    </p>
-    <div class="hero__tools">
-      <span class="tool-chip"><i class="ri-scissors-cut-line"></i> Premiere Pro</span>
-      <span class="tool-chip"><i class="ri-palette-line"></i> DaVinci Resolve</span>
-      <span class="tool-chip"><i class="ri-smartphone-line"></i> CapCut</span>
-      <span class="tool-chip"><i class="ri-image-line"></i> Photoshop</span>
-      <span class="tool-chip"><i class="ri-pen-nib-line"></i> Illustrator</span>
-    </div>
-  </section>
+  <!-- ── MAIN GRID ─────────────────────────────────────────── -->
+  <main class="main-grid">
 
-  <!-- SAMPLE WORKS -->
-  <section class="section">
-    <div class="section__header">
-      <h2 class="section__title">Sample Works &amp; Projects</h2>
-      <span class="section__hint">Tap Preview to watch</span>
-    </div>
+    <!-- LEFT: Hero + Contact -->
+    <div class="left-panel">
 
-    <div class="works-grid">
-
-      <article class="work-card"
-               data-title="Nerthi" data-type="reel"
-               data-src="https://drive.google.com/file/d/1UAqnht9mTdhuNC2AoiS2JPebtkNzhiAl/preview"
-               data-link="https://drive.google.com/file/d/1UAqnht9mTdhuNC2AoiS2JPebtkNzhiAl/view">
-        <div class="work-card__meta">
-          <span class="work-card__num">01</span>
-          <span class="work-card__pill">Reel<br>9:16</span>
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero__badge">
+          <span class="badge-dot"></span>
+          Available for Projects
         </div>
-        <div class="work-card__divider"></div>
-        <h3 class="work-card__title">Nerthi</h3>
-        <div class="work-card__actions">
-          <button class="work-card__preview-btn"><i class="ri-play-fill"></i> Tap to Preview</button>
-          <a href="https://drive.google.com/file/d/1UAqnht9mTdhuNC2AoiS2JPebtkNzhiAl/view"
-             target="_blank" rel="noopener noreferrer" class="work-card__link" onclick="event.stopPropagation()">
-            Drive <i class="ri-arrow-right-up-line"></i>
+
+        <h1 class="hero__name">Thamodharan<br>Ganesan</h1>
+
+        <div class="hero__role-wrap">
+          <span class="hero__role" id="heroRole">Video Editor &amp; Reels / Shorts Editor</span>
+        </div>
+        <span class="hero__line" aria-hidden="true"></span>
+
+        <p class="hero__bio">
+          High-retention videos &amp; clean visual designs.
+          Premiere Pro · DaVinci · CapCut · Photoshop · Illustrator
+        </p>
+
+        <div class="hero__tools">
+          <span class="tool-chip"><i class="ri-scissors-cut-line"></i>Premiere Pro</span>
+          <span class="tool-chip"><i class="ri-palette-line"></i>DaVinci</span>
+          <span class="tool-chip"><i class="ri-smartphone-line"></i>CapCut</span>
+          <span class="tool-chip"><i class="ri-image-line"></i>Photoshop</span>
+          <span class="tool-chip"><i class="ri-pen-nib-line"></i>Illustrator</span>
+        </div>
+      </div>
+
+      <!-- Contact strip -->
+      <div class="contact-strip">
+        <p class="contact-strip__label">Let's work together</p>
+        <div class="contact-strip__btns">
+          <a href="https://wa.me/916381893190" target="_blank" rel="noopener" class="c-btn c-btn--primary">
+            <i class="ri-whatsapp-line"></i><span>WhatsApp</span>
+          </a>
+          <a href="tel:+916381893190" class="c-btn c-btn--outline">
+            <i class="ri-phone-line"></i><span>Call</span>
+          </a>
+          <a href="mailto:thamodharangp@gmail.com" class="c-btn c-btn--outline">
+            <i class="ri-mail-line"></i><span>Email</span>
           </a>
         </div>
-      </article>
+      </div>
 
-      <article class="work-card"
-               data-title="Social Media Marketing" data-type="reel"
-               data-src="https://drive.google.com/file/d/14HbFBe0sSesLzSedp4jE7cXZePhlgIbd/preview"
-               data-link="https://drive.google.com/file/d/14HbFBe0sSesLzSedp4jE7cXZePhlgIbd/view?usp=drive_link">
-        <div class="work-card__meta">
-          <span class="work-card__num">02</span>
-          <span class="work-card__pill">Reel<br>9:16</span>
-        </div>
-        <div class="work-card__divider"></div>
-        <h3 class="work-card__title">Social Media Marketing</h3>
-        <div class="work-card__actions">
-          <button class="work-card__preview-btn"><i class="ri-play-fill"></i> Tap to Preview</button>
-          <a href="https://drive.google.com/file/d/14HbFBe0sSesLzSedp4jE7cXZePhlgIbd/view?usp=drive_link"
-             target="_blank" rel="noopener noreferrer" class="work-card__link" onclick="event.stopPropagation()">
-            Drive <i class="ri-arrow-right-up-line"></i>
-          </a>
-        </div>
-      </article>
+    </div><!-- /left-panel -->
 
-      <article class="work-card"
-               data-title="Campus Ambassador" data-type="reel"
-               data-src="https://drive.google.com/file/d/1q10tMoVq_8yzyaPBKPccGrSWyfTqy8kb/preview"
-               data-link="https://drive.google.com/file/d/1q10tMoVq_8yzyaPBKPccGrSWyfTqy8kb/view">
-        <div class="work-card__meta">
-          <span class="work-card__num">03</span>
-          <span class="work-card__pill">Reel<br>9:16</span>
-        </div>
-        <div class="work-card__divider"></div>
-        <h3 class="work-card__title">Campus Ambassador</h3>
-        <div class="work-card__actions">
-          <button class="work-card__preview-btn"><i class="ri-play-fill"></i> Tap to Preview</button>
-          <a href="https://drive.google.com/file/d/1q10tMoVq_8yzyaPBKPccGrSWyfTqy8kb/view"
-             target="_blank" rel="noopener noreferrer" class="work-card__link" onclick="event.stopPropagation()">
-            Drive <i class="ri-arrow-right-up-line"></i>
-          </a>
-        </div>
-      </article>
+    <!-- RIGHT: Works -->
+    <div class="right-panel">
+      <div class="panel-header">
+        <h2 class="panel-header__title">Sample Works &amp; Projects</h2>
+        <span class="panel-header__hint">Tap to preview</span>
+      </div>
 
-      <article class="work-card"
-               data-title="Escape the Matrix" data-type="reel"
-               data-src="https://drive.google.com/file/d/1p1jh5ZE7b1YlfHM-bFiuuZhoFPP8noTh/preview"
-               data-link="https://drive.google.com/file/d/1p1jh5ZE7b1YlfHM-bFiuuZhoFPP8noTh/view">
-        <div class="work-card__meta">
-          <span class="work-card__num">04</span>
-          <span class="work-card__pill">Reel<br>9:16</span>
-        </div>
-        <div class="work-card__divider"></div>
-        <h3 class="work-card__title">Escape the Matrix</h3>
-        <div class="work-card__actions">
-          <button class="work-card__preview-btn"><i class="ri-play-fill"></i> Tap to Preview</button>
-          <a href="https://drive.google.com/file/d/1p1jh5ZE7b1YlfHM-bFiuuZhoFPP8noTh/view"
-             target="_blank" rel="noopener noreferrer" class="work-card__link" onclick="event.stopPropagation()">
-            Drive <i class="ri-arrow-right-up-line"></i>
-          </a>
-        </div>
-      </article>
+      <div class="works-list" role="list">
 
-      <article class="work-card"
-               data-title="Burger Vector Design" data-type="vector"
-               data-src="https://drive.google.com/file/d/1iM4StN0_HOXxWx4ks-aqt8fBjuIyYahm/preview"
-               data-link="https://drive.google.com/file/d/1iM4StN0_HOXxWx4ks-aqt8fBjuIyYahm/view?usp=sharing">
-        <div class="work-card__meta">
-          <span class="work-card__num">05</span>
-          <span class="work-card__pill">Illus<br>Vector</span>
-        </div>
-        <div class="work-card__divider"></div>
-        <h3 class="work-card__title">Burger Vector Design</h3>
-        <div class="work-card__actions">
-          <button class="work-card__preview-btn"><i class="ri-eye-line"></i> Tap to Preview</button>
-          <a href="https://drive.google.com/file/d/1iM4StN0_HOXxWx4ks-aqt8fBjuIyYahm/view?usp=sharing"
-             target="_blank" rel="noopener noreferrer" class="work-card__link" onclick="event.stopPropagation()">
-            Drive <i class="ri-arrow-right-up-line"></i>
-          </a>
-        </div>
-      </article>
+        <article class="wcard" role="listitem"
+                 data-title="Nerthi" data-type="reel"
+                 data-src="https://drive.google.com/file/d/1UAqnht9mTdhuNC2AoiS2JPebtkNzhiAl/preview"
+                 data-link="https://drive.google.com/file/d/1UAqnht9mTdhuNC2AoiS2JPebtkNzhiAl/view">
+          <span class="wcard__num">01</span>
+          <span class="wcard__type">Reel</span>
+          <div class="wcard__divider"></div>
+          <h3 class="wcard__title">Nerthi</h3>
+          <div class="wcard__btns">
+            <button class="wcard__play" aria-label="Preview Nerthi"><i class="ri-play-fill"></i> Tap to Preview</button>
+            <a href="https://drive.google.com/file/d/1UAqnht9mTdhuNC2AoiS2JPebtkNzhiAl/view"
+               target="_blank" rel="noopener" class="wcard__drive" onclick="event.stopPropagation()">
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </article>
 
-      <article class="work-card"
-               data-title="Coffee Vector Design" data-type="vector"
-               data-src="https://drive.google.com/file/d/163gDOjlfxhxCrC-XmHEPRM9CJBLQv2Jq/preview"
-               data-link="https://drive.google.com/file/d/163gDOjlfxhxCrC-XmHEPRM9CJBLQv2Jq/view?usp=sharing">
-        <div class="work-card__meta">
-          <span class="work-card__num">06</span>
-          <span class="work-card__pill">Illus<br>Vector</span>
-        </div>
-        <div class="work-card__divider"></div>
-        <h3 class="work-card__title">Coffee Vector Design</h3>
-        <div class="work-card__actions">
-          <button class="work-card__preview-btn"><i class="ri-eye-line"></i> Tap to Preview</button>
-          <a href="https://drive.google.com/file/d/163gDOjlfxhxCrC-XmHEPRM9CJBLQv2Jq/view?usp=sharing"
-             target="_blank" rel="noopener noreferrer" class="work-card__link" onclick="event.stopPropagation()">
-            Drive <i class="ri-arrow-right-up-line"></i>
-          </a>
-        </div>
-      </article>
+        <article class="wcard" role="listitem"
+                 data-title="Social Media Marketing" data-type="reel"
+                 data-src="https://drive.google.com/file/d/14HbFBe0sSesLzSedp4jE7cXZePhlgIbd/preview"
+                 data-link="https://drive.google.com/file/d/14HbFBe0sSesLzSedp4jE7cXZePhlgIbd/view?usp=drive_link">
+          <span class="wcard__num">02</span>
+          <span class="wcard__type">Reel</span>
+          <div class="wcard__divider"></div>
+          <h3 class="wcard__title">Social Media Marketing</h3>
+          <div class="wcard__btns">
+            <button class="wcard__play"><i class="ri-play-fill"></i> Tap to Preview</button>
+            <a href="https://drive.google.com/file/d/14HbFBe0sSesLzSedp4jE7cXZePhlgIbd/view?usp=drive_link"
+               target="_blank" rel="noopener" class="wcard__drive" onclick="event.stopPropagation()">
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </article>
 
-    </div>
-  </section>
+        <article class="wcard" role="listitem"
+                 data-title="Campus Ambassador" data-type="reel"
+                 data-src="https://drive.google.com/file/d/1q10tMoVq_8yzyaPBKPccGrSWyfTqy8kb/preview"
+                 data-link="https://drive.google.com/file/d/1q10tMoVq_8yzyaPBKPccGrSWyfTqy8kb/view">
+          <span class="wcard__num">03</span>
+          <span class="wcard__type">Reel</span>
+          <div class="wcard__divider"></div>
+          <h3 class="wcard__title">Campus Ambassador</h3>
+          <div class="wcard__btns">
+            <button class="wcard__play"><i class="ri-play-fill"></i> Tap to Preview</button>
+            <a href="https://drive.google.com/file/d/1q10tMoVq_8yzyaPBKPccGrSWyfTqy8kb/view"
+               target="_blank" rel="noopener" class="wcard__drive" onclick="event.stopPropagation()">
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </article>
 
-  <!-- CONTACT -->
-  <section class="contact-section">
-    <h2 class="contact-section__title">Let's discuss your next project</h2>
-    <p class="contact-section__sub">Have footage ready or need thumbnails? Drop a message anytime.</p>
-    <div class="contact-actions">
-      <a href="https://wa.me/916381893190" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
-        <i class="ri-whatsapp-line"></i><span>WhatsApp: +91 63818 93190</span>
-      </a>
-      <a href="tel:+916381893190" class="btn btn--outline">
-        <i class="ri-phone-line"></i><span>+91 63818 93190</span>
-      </a>
-      <a href="mailto:thamodharangp@gmail.com" class="btn btn--outline">
-        <i class="ri-mail-line"></i><span>thamodharangp@gmail.com</span>
-      </a>
-    </div>
-  </section>
+        <article class="wcard" role="listitem"
+                 data-title="Escape the Matrix" data-type="reel"
+                 data-src="https://drive.google.com/file/d/1p1jh5ZE7b1YlfHM-bFiuuZhoFPP8noTh/preview"
+                 data-link="https://drive.google.com/file/d/1p1jh5ZE7b1YlfHM-bFiuuZhoFPP8noTh/view">
+          <span class="wcard__num">04</span>
+          <span class="wcard__type">Reel</span>
+          <div class="wcard__divider"></div>
+          <h3 class="wcard__title">Escape the Matrix</h3>
+          <div class="wcard__btns">
+            <button class="wcard__play"><i class="ri-play-fill"></i> Tap to Preview</button>
+            <a href="https://drive.google.com/file/d/1p1jh5ZE7b1YlfHM-bFiuuZhoFPP8noTh/view"
+               target="_blank" rel="noopener" class="wcard__drive" onclick="event.stopPropagation()">
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </article>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <span class="footer__brand">Thamodharan Ganesan &bull; Video Editor</span>
-    <span class="footer__tag">Orange &amp; Green Theme</span>
-  </footer>
+        <article class="wcard" role="listitem"
+                 data-title="Burger Vector Design" data-type="vector"
+                 data-src="https://drive.google.com/file/d/1iM4StN0_HOXxWx4ks-aqt8fBjuIyYahm/preview"
+                 data-link="https://drive.google.com/file/d/1iM4StN0_HOXxWx4ks-aqt8fBjuIyYahm/view?usp=sharing">
+          <span class="wcard__num">05</span>
+          <span class="wcard__type">Vector</span>
+          <div class="wcard__divider"></div>
+          <h3 class="wcard__title">Burger Vector Design</h3>
+          <div class="wcard__btns">
+            <button class="wcard__play"><i class="ri-eye-line"></i> Tap to Preview</button>
+            <a href="https://drive.google.com/file/d/1iM4StN0_HOXxWx4ks-aqt8fBjuIyYahm/view?usp=sharing"
+               target="_blank" rel="noopener" class="wcard__drive" onclick="event.stopPropagation()">
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </article>
 
-</div>
+        <article class="wcard" role="listitem"
+                 data-title="Coffee Vector Design" data-type="vector"
+                 data-src="https://drive.google.com/file/d/163gDOjlfxhxCrC-XmHEPRM9CJBLQv2Jq/preview"
+                 data-link="https://drive.google.com/file/d/163gDOjlfxhxCrC-XmHEPRM9CJBLQv2Jq/view?usp=sharing">
+          <span class="wcard__num">06</span>
+          <span class="wcard__type">Vector</span>
+          <div class="wcard__divider"></div>
+          <h3 class="wcard__title">Coffee Vector Design</h3>
+          <div class="wcard__btns">
+            <button class="wcard__play"><i class="ri-eye-line"></i> Tap to Preview</button>
+            <a href="https://drive.google.com/file/d/163gDOjlfxhxCrC-XmHEPRM9CJBLQv2Jq/view?usp=sharing"
+               target="_blank" rel="noopener" class="wcard__drive" onclick="event.stopPropagation()">
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /works-list -->
+
+      <div class="panel-footer">
+        Thamodharan Ganesan &bull; Video Editor
+        <span class="panel-footer__tag">+91 63818 93190</span>
+      </div>
+    </div><!-- /right-panel -->
+
+  </main>
+
+</div><!-- /page -->
 
 <!-- MODAL -->
 <div class="modal-overlay" id="previewModal" role="dialog" aria-modal="true" aria-hidden="true">
@@ -211,7 +209,7 @@
     <div class="modal-iframe-wrap" id="modalIframeWrap"></div>
     <div class="modal-info">
       <span class="modal-title" id="modalTitle"></span>
-      <a href="#" target="_blank" rel="noopener noreferrer" class="modal-drive-link" id="modalDriveLink">
+      <a href="#" target="_blank" rel="noopener" class="modal-drive-link" id="modalDriveLink">
         Open on Drive <i class="ri-arrow-right-up-line"></i>
       </a>
     </div>

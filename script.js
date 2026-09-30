@@ -1,26 +1,24 @@
 /**
- * Portfolio Script — Complete Rewrite
- *
- * 1. Theme Toggle (Orange ↔ Green) with localStorage
- * 2. Dynamic Role Text Cycling
- * 3. Modal Preview System (Drive embed inside popup)
+ * Portfolio Script
+ * 1. Theme Toggle (Orange ↔ Green)
+ * 2. Role Text Animation
+ * 3. Modal Preview (Drive embed)
  */
 
-/* ── 1. Theme Toggle ─────────────────────────────────────────────── */
+/* ── 1. Theme ────────────────────────────────────────────────────── */
 const initTheme = () => {
   const toggle    = document.getElementById('themeToggle');
   const icon      = document.getElementById('themeIcon');
-  const labelText = document.getElementById('themeLabel-text');
+  const labelText = document.getElementById('themeLabelText');
   if (!toggle) return;
 
   const apply = (isGreen) => {
     document.body.classList.toggle('green-mode', isGreen);
-    toggle.checked     = isGreen;
-    icon.className     = isGreen ? 'ri-moon-line' : 'ri-sun-line';
+    toggle.checked = isGreen;
+    if (icon) icon.className = isGreen ? 'ri-moon-line' : 'ri-sun-line';
     if (labelText) labelText.textContent = isGreen ? 'Green' : 'Orange';
   };
 
-  // Restore saved preference
   apply(localStorage.getItem('theme') === 'green');
 
   toggle.addEventListener('change', () => {
@@ -30,7 +28,7 @@ const initTheme = () => {
   });
 };
 
-/* ── 2. Role Text Animation ──────────────────────────────────────── */
+/* ── 2. Role Animation ───────────────────────────────────────────── */
 const initRoles = () => {
   const roles = [
     'Video Editor & Reels / Shorts Editor',
@@ -45,52 +43,38 @@ const initRoles = () => {
 
   let idx = 0;
 
-  const next = () => {
+  setInterval(() => {
     el.classList.add('slide-out');
-
     setTimeout(() => {
       idx = (idx + 1) % roles.length;
       el.textContent = roles[idx];
       el.classList.remove('slide-out');
       el.classList.add('slide-in');
-
-      el.addEventListener('animationend', () => {
-        el.classList.remove('slide-in');
-      }, { once: true });
-    }, 320);
-  };
-
-  setInterval(next, 3000);
+      el.addEventListener('animationend', () => el.classList.remove('slide-in'), { once: true });
+    }, 290);
+  }, 3000);
 };
 
-/* ── 3. Modal Preview System ─────────────────────────────────────── */
+/* ── 3. Modal Preview ────────────────────────────────────────────── */
 const initModal = () => {
-  const overlay     = document.getElementById('previewModal');
-  const box         = document.getElementById('modalBox');
-  const closeBtn    = document.getElementById('modalClose');
-  const iframeWrap  = document.getElementById('modalIframeWrap');
-  const titleEl     = document.getElementById('modalTitle');
-  const driveLink   = document.getElementById('modalDriveLink');
-
+  const overlay    = document.getElementById('previewModal');
+  const box        = document.getElementById('modalBox');
+  const closeBtn   = document.getElementById('modalClose');
+  const iframeWrap = document.getElementById('modalIframeWrap');
+  const titleEl    = document.getElementById('modalTitle');
+  const driveLink  = document.getElementById('modalDriveLink');
   if (!overlay) return;
-
-  let activeIframe = null;
 
   const openModal = (card) => {
     const src   = card.dataset.src;
     const title = card.dataset.title;
     const link  = card.dataset.link;
-    const type  = card.dataset.type; // 'reel' | 'vector'
+    const type  = card.dataset.type;
 
-    // Set modal type class
-    box.className = 'modal-box';
-    box.classList.add(type === 'reel' ? 'modal-box--reel' : 'modal-box--vector');
-
-    // Set title & link
+    box.className = 'modal-box modal-box--' + (type === 'reel' ? 'reel' : 'vector');
     titleEl.textContent = title;
     driveLink.href = link;
 
-    // Inject iframe
     const iframe = document.createElement('iframe');
     iframe.src = src;
     iframe.title = title;
@@ -98,9 +82,7 @@ const initModal = () => {
     iframe.loading = 'lazy';
     iframeWrap.innerHTML = '';
     iframeWrap.appendChild(iframe);
-    activeIframe = iframe;
 
-    // Open overlay
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -111,62 +93,38 @@ const initModal = () => {
     overlay.classList.remove('is-open');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-
-    // Remove iframe after animation to stop video
-    setTimeout(() => {
-      iframeWrap.innerHTML = '';
-      activeIframe = null;
-    }, 280);
+    setTimeout(() => { iframeWrap.innerHTML = ''; }, 250);
   };
 
-  // Card or Preview btn click → open modal
-  document.querySelectorAll('.work-card').forEach(card => {
-    // Clicking the preview button
-    const previewBtn = card.querySelector('.work-card__preview-btn');
-    if (previewBtn) {
-      previewBtn.addEventListener('click', (e) => {
+  /* Attach to every .wcard */
+  document.querySelectorAll('.wcard').forEach(card => {
+    /* Preview button inside card */
+    const playBtn = card.querySelector('.wcard__play');
+    if (playBtn) {
+      playBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         openModal(card);
       });
     }
 
-    // Clicking anywhere else on card also opens modal
+    /* Click anywhere on card also opens */
     card.addEventListener('click', () => openModal(card));
 
-    // Keyboard: Enter / Space
+    /* Keyboard */
     card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal(card);
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
     });
   });
 
-  // Close button
   closeBtn.addEventListener('click', closeModal);
-
-  // Click outside modal box → close
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeModal();
-  });
-
-  // Escape key → close
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
-      closeModal();
-    }
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
   });
 };
 
 /* ── Boot ────────────────────────────────────────────────────────── */
-const boot = () => {
-  initTheme();
-  initRoles();
-  initModal();
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', boot, { once: true });
-} else {
-  boot();
-}
+const boot = () => { initTheme(); initRoles(); initModal(); };
+document.readyState === 'loading'
+  ? document.addEventListener('DOMContentLoaded', boot, { once: true })
+  : boot();
