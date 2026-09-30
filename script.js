@@ -120,23 +120,16 @@ const initModal = () => {
   });
 };
 
-/* ── 4. Creative Motion Studio ───────────────────────────────────── */
+/* ── 4. Creative Motion Showcase ─────────────────────────────────── */
 const initMotionStudio = () => {
   const tabs = document.querySelectorAll('.studio-tab');
   const scenes = document.querySelectorAll('.studio-scene');
-  const progressFill = document.getElementById('studioProgressFill');
-  const playPauseBtn = document.getElementById('studioPlayPause');
-  const playPauseIcon = document.getElementById('studioPlayPauseIcon');
   const stage = document.getElementById('studioStage');
 
   if (!tabs.length || !scenes.length) return;
 
   let currentIdx = 0;
-  let isPlaying = true;
-  const DURATION = 6000; // 6 seconds per scene
-  let startTime = Date.now();
-  let elapsedBeforePause = 0;
-  let rafId = null;
+  let timer = null;
 
   const showScene = (idx) => {
     currentIdx = idx;
@@ -148,75 +141,28 @@ const initMotionStudio = () => {
     scenes.forEach((scene, i) => {
       scene.classList.toggle('is-active', i === idx);
     });
-    // Reset timer
-    startTime = Date.now();
-    elapsedBeforePause = 0;
-    if (progressFill) progressFill.style.width = '0%';
   };
 
-  const tick = () => {
-    if (!isPlaying) return;
-    const now = Date.now();
-    const elapsed = elapsedBeforePause + (now - startTime);
-    const pct = Math.min((elapsed / DURATION) * 100, 100);
-    if (progressFill) progressFill.style.width = pct + '%';
-
-    if (elapsed >= DURATION) {
+  const startTimer = () => {
+    clearInterval(timer);
+    timer = setInterval(() => {
       showScene((currentIdx + 1) % scenes.length);
-    }
-    rafId = requestAnimationFrame(tick);
-  };
-
-  const startLoop = () => {
-    if (isPlaying && rafId) return;
-    isPlaying = true;
-    startTime = Date.now();
-    if (playPauseIcon) playPauseIcon.className = 'ri-pause-line';
-    cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(tick);
-  };
-
-  const pauseLoop = () => {
-    if (!isPlaying) return;
-    isPlaying = false;
-    elapsedBeforePause += Date.now() - startTime;
-    if (playPauseIcon) playPauseIcon.className = 'ri-play-line';
-    cancelAnimationFrame(rafId);
+    }, 5000);
   };
 
   tabs.forEach((tab, idx) => {
     tab.addEventListener('click', () => {
       showScene(idx);
-      if (isPlaying) {
-        startTime = Date.now();
-        elapsedBeforePause = 0;
-      }
+      startTimer();
     });
   });
 
-  let userManualPause = false;
-  if (playPauseBtn) {
-    playPauseBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        pauseLoop();
-        userManualPause = true;
-      } else {
-        startLoop();
-        userManualPause = false;
-      }
-    });
-  }
-
   if (stage) {
-    stage.addEventListener('mouseenter', () => {
-      if (isPlaying) pauseLoop();
-    });
-    stage.addEventListener('mouseleave', () => {
-      if (!isPlaying && !userManualPause) startLoop();
-    });
+    stage.addEventListener('mouseenter', () => clearInterval(timer));
+    stage.addEventListener('mouseleave', () => startTimer());
   }
 
-  startLoop();
+  startTimer();
 };
 
 /* ── Boot ────────────────────────────────────────────────────────── */

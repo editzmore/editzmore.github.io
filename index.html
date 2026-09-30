@@ -78,20 +78,17 @@
     </div><!-- /left-panel -->
 
 
-    <!-- ── CENTER: Creative Motion Studio ───────────────────── -->
-    <section class="center-panel" aria-label="Creative Motion Studio">
+    <!-- ── CENTER: Creative Showcase ─────────────────────────── -->
+    <section class="center-panel" aria-label="Creative Showcase">
 
       <div class="studio-header">
-        <div class="studio-status">
-          <span class="studio-status__dot"></span>
-          <span class="studio-status__text">Craft in Motion</span>
-        </div>
+        <span class="studio-label">Showcase</span>
         <div class="studio-tabs" role="tablist">
           <button class="studio-tab is-active" id="tabVideo" data-scene="video" role="tab" aria-selected="true" aria-controls="sceneVideo">
-            <i class="ri-movie-2-line"></i><span>Video</span>
+            Video
           </button>
           <button class="studio-tab" id="tabPoster" data-scene="poster" role="tab" aria-selected="false" aria-controls="scenePoster">
-            <i class="ri-brush-3-line"></i><span>Poster</span>
+            Poster
           </button>
         </div>
       </div>
@@ -101,24 +98,7 @@
         <!-- SCENE 1: Video Editing Screen -->
         <div class="studio-scene studio-scene--video is-active" id="sceneVideo" role="tabpanel" aria-labelledby="tabVideo">
           <div class="studio-scene__canvas">
-            <!-- Glow background -->
             <div class="studio-glow studio-glow--video" aria-hidden="true"></div>
-
-            <!-- Scanner Laser Line -->
-            <div class="studio-scanner" aria-hidden="true"></div>
-
-            <!-- Floating Badges -->
-            <div class="studio-float-badge badge-pos-tl">
-              <i class="ri-film-line"></i><span>4K · 60FPS</span>
-            </div>
-            <div class="studio-float-badge badge-pos-tr">
-              <i class="ri-sound-module-line"></i><span>Beat Sync</span>
-            </div>
-            <div class="studio-float-badge badge-pos-br">
-              <i class="ri-sparkling-line"></i><span>Color Grade</span>
-            </div>
-
-            <!-- Video SVG Wrapper -->
             <div class="studio-art studio-art--video">
               <svg class="studio-svg studio-svg--video" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Editing video at a screen" viewBox="-0.0 -23.0 301.0 301.0"><g transform="translate(0.000000,255.000000) scale(0.100000,-0.100000)"><path d="M545 2356 c-83 -21 -188 -76 -173 -92 4 -3 18 2 32 11 23 15 25 15
 20 2 -5 -14 -1 -14 42 -1 26 8 57 13 68 13 19 -1 20 -2 2 -6 -31 -8 -119 -70
@@ -210,62 +190,16 @@ M2048 1555 c-14 -19 -18 -44 -18 -119 l0 -95 33 -6 c35 -6 241 -25 270 -25 14
 -67 81 -44 44 -55 60 -33 44 70 -50 63 -38 -45 71 -103 105 -247 231 -230 200z
 M1050 190 c8 -5 22 -9 30 -9 10 0 8 3 -5 9 -27 12 -43 12 -25 0z"/></g></svg>
             </div>
-
-            <!-- Equalizer Sound Wave Animation -->
-            <div class="studio-eq" aria-hidden="true">
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-              <span class="eq-col"></span>
-            </div>
           </div>
-
           <div class="studio-meta">
-            <h3 class="studio-meta__title">Timeline &amp; Storytelling</h3>
-            <p class="studio-meta__sub">Dynamic cuts, smooth retention pacing &amp; soundscapes</p>
+            <h3 class="studio-meta__title">Video Editing</h3>
           </div>
         </div>
 
         <!-- SCENE 2: Cartoon Person Editing Poster -->
         <div class="studio-scene studio-scene--poster" id="scenePoster" role="tabpanel" aria-labelledby="tabPoster">
           <div class="studio-scene__canvas">
-            <!-- Glow background -->
             <div class="studio-glow studio-glow--poster" aria-hidden="true"></div>
-
-            <!-- Corner Alignment Crosshairs -->
-            <div class="studio-corners" aria-hidden="true">
-              <span class="corner-mark corner-mark--tl"></span>
-              <span class="corner-mark corner-mark--tr"></span>
-              <span class="corner-mark corner-mark--bl"></span>
-              <span class="corner-mark corner-mark--br"></span>
-            </div>
-
-            <!-- Floating Badges -->
-            <div class="studio-float-badge badge-pos-tl">
-              <i class="ri-pen-nib-line"></i><span>Vector Pen</span>
-            </div>
-            <div class="studio-float-badge badge-pos-tr">
-              <i class="ri-layout-masonry-line"></i><span>Poster Art</span>
-            </div>
-            <div class="studio-float-badge badge-pos-br">
-              <i class="ri-shapes-line"></i><span>Typography</span>
-            </div>
-
-            <!-- Floating Color Palette Swatches -->
-            <div class="studio-palette" aria-hidden="true">
-              <span class="palette-dot dot--orange"></span>
-              <span class="palette-dot dot--green"></span>
-              <span class="palette-dot dot--mint"></span>
-              <span class="palette-dot dot--amber"></span>
-            </div>
-
-            <!-- Poster SVG Wrapper -->
             <div class="studio-art studio-art--poster">
               <svg class="studio-svg studio-svg--poster" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="A person editing a poster" viewBox="-0.0 -6.5 285.0 285.0"><g transform="translate(0.000000,272.000000) scale(0.100000,-0.100000)"><path d="M370 2494 c-25 -25 -52 -49 -60 -52 -9 -4 -42 -36 -74 -71 l-58 -63
 38 -41 c22 -23 45 -46 52 -52 9 -8 13 -199 15 -885 l2 -875 140 -3 c77 -2 280
@@ -374,29 +308,12 @@ c-3 17 -6 45 -6 61 0 25 -6 32 -46 50 l-47 20 49 27 c46 25 49 29 58 80 l9 54
 -47 15 -66 26 -66 12 0 14 11 8 68 -7 68 -27 109 -39 78z"/></g></svg>
             </div>
           </div>
-
           <div class="studio-meta">
-            <h3 class="studio-meta__title">Poster &amp; Vector Artwork</h3>
-            <p class="studio-meta__sub">Bold compositions, clean lines &amp; visual identity</p>
+            <h3 class="studio-meta__title">Poster &amp; Vector Art</h3>
           </div>
         </div>
 
       </div><!-- /studio-stage -->
-
-      <!-- Auto-cycle progress bar & controls -->
-      <div class="studio-footer">
-        <div class="studio-progress">
-          <div class="studio-progress__track">
-            <div class="studio-progress__fill" id="studioProgressFill"></div>
-          </div>
-        </div>
-        <div class="studio-footer__row">
-          <span class="studio-footer__label"><i class="ri-loop-right-line"></i> Auto-Motion</span>
-          <button class="studio-playpause" id="studioPlayPause" title="Pause / Resume auto motion" aria-label="Pause / Resume auto motion">
-            <i class="ri-pause-line" id="studioPlayPauseIcon"></i>
-          </button>
-        </div>
-      </div>
 
     </section><!-- /center-panel -->
 
