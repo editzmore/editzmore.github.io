@@ -602,16 +602,6 @@ body:has(.switch__input:checked) .switch__mode--green {
   justify-content: center;
 }
 
-.sample-preview-box iframe {
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  border: none;
-  display: block;
-}
-
 .sample-preview-box.reel-frame {
   position: relative;
   width: 100%;
