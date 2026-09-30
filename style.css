@@ -44,7 +44,6 @@
 }
 
 body.green-mode {
-  --canvas:  #062015;
   --canvas:      #041a10;
   --canvas-end:  #071f14;
   --card:        #7a2302;          /* deep rust */
