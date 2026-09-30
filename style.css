@@ -603,22 +603,42 @@ body:has(.switch__input:checked) .switch__mode--green {
 }
 
 .sample-preview-box iframe {
-  width: 100%;
-  height: 100%;
-  flex: none;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
   border: none;
   display: block;
 }
 
 .sample-preview-box.reel-frame {
+  position: relative;
   width: 100%;
-  height: auto;
-  aspect-ratio: 9 / 16;
-  align-self: center;
+  height: 0;
+  padding-bottom: 177.78%; /* 9:16 ratio */
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+}
+
+.sample-preview-box.reel-frame iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  transform: translate(-50%, -50%);
+  border: none;
+  display: block;
 }
 
 .sample-preview-box.landscape-frame {
+  width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
+  display: block;
+  overflow: hidden;
 }
 
 .sample-preview-link {
@@ -667,17 +687,24 @@ body:has(.switch__input:checked) .switch__mode--green {
   outline-offset: -3px;
 }
 
-.sample-preview-box.vector-frame iframe {
-  height: auto;
-  width: min(100%, 360px);
-  aspect-ratio: 3 / 4;
-  max-width: 100%;
-  max-height: 100%;
+.sample-preview-box.vector-frame {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 133.33%; /* 4/3 * 100 for 3:4 ratio */
+  overflow: hidden;
+  display: block;
 }
 
-.sample-preview-box.vector-frame {
-  height: auto;
-  aspect-ratio: 3 / 4;
+.sample-preview-box.vector-frame iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  transform: translate(-50%, -50%);
+  border: none;
+  display: block;
 }
 
 .sample-card-body {
@@ -816,11 +843,80 @@ body:has(.switch__input:checked) .switch__mode--green {
 }
 
 /* ===================================================================
-   RESPONSIVE DESIGN (Desktop, Tablet, Mobile)
+   RESPONSIVE DESIGN — All Devices (Desktop / Tablet / Mobile)
+   iOS Safari · Android Chrome · Landscape / Portrait
    =================================================================== */
 
-/* Desktop & Laptop Screens (> 900px) */
-@media (min-width: 901px) {
+/* ── Touch & iOS/Android base fixes ─────────────────────────── */
+html {
+  /* iOS Safari: prevent bounce overscroll from showing white */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent tap highlight flash on Android */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  /* iOS Safari 100vh fix */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  /* Prevent horizontal scroll on all devices */
+  overflow-x: hidden;
+  /* iOS momentum scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Safe area padding for notched phones (iPhone X+, punch-hole Androids) */
+.site-wrapper {
+  padding-left:  max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-right));
+  padding-bottom: max(clamp(1.5rem, 5vw, 3.2rem), env(safe-area-inset-bottom));
+}
+
+/* Touch-friendly minimum tap targets (WCAG 2.5.5 — 44×44px) */
+.chat-btn,
+.sample-btn,
+.btn,
+.switch {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+/* Prevent font-size inflation on orientation change (iOS) */
+* {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Disable iframes on very small screens to avoid layout collapse */
+.sample-preview-box iframe {
+  /* iOS: allow iframe scrolling to play videos */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Large Desktop (≥ 1280px) ────────────────────────────────── */
+@media (min-width: 1280px) {
+  .site-wrapper {
+    max-width: 1200px;
+    padding: 3rem 2.5rem;
+  }
+
+  .samples-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.15rem;
+    max-width: 720px;
+  }
+}
+
+/* ── Desktop / Laptop (901px – 1279px) ───────────────────────── */
+@media (min-width: 901px) and (max-width: 1279px) {
   .site-wrapper {
     max-width: 1120px;
   }
@@ -835,8 +931,25 @@ body:has(.switch__input:checked) .switch__mode--green {
   }
 }
 
-/* Tablet Screens (641px - 900px) */
-@media (max-width: 900px) and (min-width: 641px) {
+/* ── Tablet Landscape (769px – 900px) ────────────────────────── */
+@media (max-width: 900px) and (min-width: 769px) {
+  .site-wrapper {
+    max-width: 880px;
+    padding: 2rem 1.8rem;
+  }
+
+  .samples-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+  }
+}
+
+/* ── Tablet Portrait (641px – 768px) ─────────────────────────── */
+@media (max-width: 768px) and (min-width: 641px) {
   .site-wrapper {
     max-width: 720px;
     padding: 2rem 1.5rem;
@@ -847,9 +960,20 @@ body:has(.switch__input:checked) .switch__mode--green {
     gap: 1.1rem;
   }
 
+  .header {
+    gap: 0.85rem;
+  }
+
+  .title {
+    font-size: clamp(1.95rem, 4vw, 2.5rem);
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
 }
 
-/* Mobile Screens (< 640px) */
+/* ── Phone Large (481px – 640px) ─────────────────────────────── */
 @media (max-width: 640px) {
   .site-wrapper {
     padding: 1.5rem 1rem 2.5rem;
@@ -870,6 +994,14 @@ body:has(.switch__input:checked) .switch__mode--green {
     line-height: 1.18;
   }
 
+  .subtitle {
+    font-size: clamp(0.92rem, 3.5vw, 1rem);
+  }
+
+  .tools-row {
+    gap: 0.45rem;
+  }
+
   /* Single-column project gallery on phones */
   .samples-grid {
     grid-template-columns: 1fr;
@@ -877,22 +1009,18 @@ body:has(.switch__input:checked) .switch__mode--green {
   }
 
   .sample-card {
-    max-width: 420px;
+    max-width: 440px;
     margin: 0 auto;
     width: 100%;
     padding: 0.85rem;
   }
 
   .sample-preview-box.reel-frame {
-    width: min(100%, 280px);
+    width: 100%;
   }
 
   .sample-card-body h3 {
     font-size: 1rem;
-  }
-
-  .sample-preview-box {
-    height: 380px;
   }
 
   .sample-btn {
@@ -924,16 +1052,22 @@ body:has(.switch__input:checked) .switch__mode--green {
   }
 }
 
-/* Small Smartphone Screens (< 420px) */
-@media (max-width: 420px) {
+/* ── Phone Small (361px – 480px) ─────────────────────────────── */
+@media (max-width: 480px) {
+  .site-wrapper {
+    padding: 1.2rem 0.9rem 2rem;
+  }
+
   .header {
     flex-direction: column;
     align-items: stretch;
     gap: 0.85rem;
+    margin-bottom: 1.8rem;
   }
 
   .user-intro {
     align-self: flex-start;
+    font-size: 0.76rem;
   }
 
   .header-right {
@@ -942,30 +1076,110 @@ body:has(.switch__input:checked) .switch__mode--green {
     align-items: center;
   }
 
+  .title {
+    font-size: clamp(1.6rem, 7vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
   .tools-row {
     gap: 0.4rem;
   }
 
   .tool-tag {
-    font-size: 0.78rem;
-    padding: 0.38rem 0.75rem;
+    font-size: 0.76rem;
+    padding: 0.38rem 0.7rem;
   }
 
   .sample-card {
     max-width: 100%;
+    padding: 0.75rem;
   }
 
   .sample-card-body {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.6rem;
   }
 
   .sample-btn {
     width: 100%;
     justify-content: center;
     padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .section-head h2 {
+    font-size: 1.2rem;
+  }
+
+  .contact-box h2 {
+    font-size: 1.25rem;
+  }
+
+  .contact-box p {
+    font-size: 0.88rem;
   }
 }
+
+/* ── Tiny Phone (≤ 360px) ────────────────────────────────────── */
+@media (max-width: 360px) {
+  .site-wrapper {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .title {
+    font-size: clamp(1.45rem, 8vw, 1.7rem);
+  }
+
+  .tool-tag {
+    font-size: 0.72rem;
+    padding: 0.32rem 0.6rem;
+  }
+
+  .chat-btn span {
+    display: none; /* Show icon only on very tiny screens */
+  }
+
+  .sample-pill {
+    font-size: 0.58rem;
+  }
+
+  .switch__mode {
+    display: none; /* Hide mode label text */
+  }
+}
+
+/* ── Phone Landscape Orientation (height < 500px) ────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-wrapper {
+    padding-top: 1rem;
+  }
+
+  .header {
+    margin-bottom: 1rem;
+  }
+
+  .intro-box {
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .samples-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+
+
 
 a:focus-visible,
 button:focus-visible,
