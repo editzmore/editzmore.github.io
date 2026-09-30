@@ -108,10 +108,9 @@ button { cursor: pointer; font: inherit; }
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;   /* theme toggle floats right */
   gap: 1rem;
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
-  flex-wrap: wrap;
 }
 
 /* Available badge */
