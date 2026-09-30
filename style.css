@@ -78,6 +78,7 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden; /* prevent horizontal scroll on all browsers */
 }
 
 body {
@@ -383,20 +384,21 @@ button { cursor: pointer; font: inherit; }
 /* Work Card */
 .work-card {
   position: relative;
+  min-width: 0;             /* prevent overflow inside grid cell */
   background: linear-gradient(145deg,
     color-mix(in srgb, var(--card) 95%, white),
     var(--card) 70%
   );
   border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
   border-radius: var(--radius-lg);
-  padding: 1rem 1.1rem;
+  padding: 0.85rem 1rem;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
-  height: 100%;          /* fill the full grid cell height */
-  min-height: 72px;
+  gap: 0.75rem;
+  height: 100%;
+  min-height: 68px;
   box-shadow: var(--shadow-card);
   transition:
     transform var(--transition-fast),
@@ -475,26 +477,28 @@ button { cursor: pointer; font: inherit; }
 .work-card__actions {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   flex: 0 0 auto;
+  flex-wrap: nowrap;    /* keep on one line */
 }
 
 /* Preview button */
 .work-card__preview-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  font-size: 0.72rem;
+  gap: 0.25rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--btn-text);
   background: var(--green);
   border: 1px solid var(--green);
   border-radius: var(--radius-pill);
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.65rem;
   white-space: nowrap;
   transition: all var(--transition-fast);
-  min-height: 34px;
+  min-height: 30px;
   cursor: pointer;
+  line-height: 1;
 }
 
 .work-card__preview-btn:hover,
@@ -508,16 +512,17 @@ button { cursor: pointer; font: inherit; }
 .work-card__link {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.72rem;
+  gap: 0.2rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--green);
   border: 1px solid var(--tag-border);
   border-radius: var(--radius-pill);
-  padding: 0.4rem 0.75rem;
+  padding: 0.35rem 0.6rem;
   white-space: nowrap;
   transition: all var(--transition-fast);
-  min-height: 34px;
+  min-height: 30px;
+  line-height: 1;
 }
 
 .work-card__link:hover {
@@ -787,47 +792,36 @@ button { cursor: pointer; font: inherit; }
   .hero__name { letter-spacing: -0.5px; }
 }
 
-/* ── Mobile (≤ 640px) ────────────────────────────────────────────── */
+/* ── Mobile (≤ 640px) ─────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .site-wrapper {
-    padding: 1.1rem 0.9rem 2.5rem;
+    padding: 1rem 0.75rem 2.5rem;
   }
 
-  /* Header: badge full-width top row, actions bottom row */
   .header {
-    gap: 0.55rem;
-    margin-bottom: 1.75rem;
-  }
-
-  .badge-available {
-    flex: 1 0 100%;
-    font-size: 0.75rem;
-  }
-
-  .header-actions {
-    flex: 1 0 100%;
-    justify-content: flex-end;
     gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  /* Hide label text in theme toggle — icon only */
+  /* Icon-only theme toggle on mobile */
   .theme-toggle__label { display: none; }
 
   .works-grid {
     grid-template-columns: 1fr;
-    gap: 0.9rem;
+    gap: 0.75rem;
   }
-
-  /* On mobile, reel cards: cap height so they don't go too tall */
-  .work-card__thumb--reel   { max-height: 360px; }
-  .work-card__thumb--vector { max-height: 320px; }
 
   .work-card {
-    padding: 0.85rem;
-    border-radius: var(--radius-md);
+    padding: 0.75rem 0.85rem;
   }
 
-  .work-card__play-icon { width: 42px; height: 42px; font-size: 1.2rem; }
+  /* On single-col mobile, buttons can breathe a bit */
+  .work-card__preview-btn,
+  .work-card__link {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.7rem;
+    min-height: 32px;
+  }
 
   .contact-actions { flex-direction: column; align-items: stretch; }
   .btn { width: 100%; justify-content: center; }
@@ -838,10 +832,10 @@ button { cursor: pointer; font: inherit; }
     text-align: center;
   }
 
-  /* Modal on mobile: near full-screen */
-  .modal-box--reel   { max-width: 100%; }
+  .modal-box--reel,
   .modal-box--vector { max-width: 100%; }
 }
+
 
 /* ── Small phone (≤ 400px) ───────────────────────────────────────── */
 @media (max-width: 400px) {
