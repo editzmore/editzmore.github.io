@@ -326,6 +326,21 @@ iframe { display: block; border: none; }
   margin-top: auto;
   transition: background var(--tr), border-color var(--tr);
 }
+.contact-strip--desktop {
+  display: flex;
+}
+.contact-strip--mobile {
+  display: none !important;
+}
+
+@media (max-width: 1023px) {
+  .contact-strip--desktop {
+    display: none !important;
+  }
+  .contact-strip--mobile {
+    display: flex !important;
+  }
+}
 .contact-strip__label {
   font-size: clamp(0.7rem,1.5vw,0.8rem);
   font-weight: 700;
