@@ -403,6 +403,20 @@ iframe { display: block; border: none; }
 .c-btn--outline { background: transparent; color: var(--text); border: 1.5px solid rgba(255,255,255,0.28); }
 .c-btn--outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.55); transform: translateY(-1px); }
 
+@media (min-width: 1280px) {
+  .contact-strip__btns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+  .contact-strip__btns .c-btn {
+    min-width: 0;
+    justify-content: center;
+    padding-inline: 0.35rem;
+    white-space: nowrap;
+  }
+}
+
 /* ── CENTER PANEL: CREATIVE SHOWCASE ─────────────────────────────── */
 .center-panel {
   display: flex;
